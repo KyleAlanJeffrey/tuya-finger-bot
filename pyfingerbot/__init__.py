@@ -26,16 +26,26 @@ class DpType(Enum):
 
 
 class DpAction(Enum):
-    ARM_DOWN_PERCENT = 9
-    ARM_UP_PERCENT = 15
-    CLICK_SUSTAIN_TIME = 10
-    TAP_ENABLE = 17
-    MODE = 8
-    INVERT_SWITCH = 11
-    TOGGLE_SWITCH = 2
-    CLICK = 101
-    PROG = 121
-
+    ##fingerbot settings
+    #ARM_DOWN_PERCENT = 9
+    #ARM_UP_PERCENT = 15
+    #CLICK_SUSTAIN_TIME = 10
+    #TAP_ENABLE = 17
+    #MODE = 8
+    #INVERT_SWITCH = 11
+    #TOGGLE_SWITCH = 2
+    #CLICK = 101
+    #PROG = 121
+    ##cubebot settings
+    ARM_DOWN_PERCENT = 6
+    ARM_UP_PERCENT = 5
+    CLICK_SUSTAIN_TIME = 3
+    TAP_ENABLE = 10
+    MODE = 2
+    INVERT_SWITCH = 4
+    TOGGLE_SWITCH = 1
+    #CLICK = 101
+    PROG = 11
 
 class SecretKeyManager:
     def __init__(self, login_key):
