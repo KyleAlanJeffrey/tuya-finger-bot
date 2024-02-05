@@ -284,7 +284,8 @@ class FingerBot:
         self.reset_sn_ack()
 
     def connect(self):
-        self.adapter.start()
+        self.adapter.start() #requires sudo to systemctl restart bluetooth.service
+        self.adapter.start(reset_on_start=False)
 
         self.device = self.adapter.connect(self.mac, address_type=pygatt.BLEAddressType.public)
         self.device.subscribe(self.NOTIF_UUID, callback=self.handle_notification)
