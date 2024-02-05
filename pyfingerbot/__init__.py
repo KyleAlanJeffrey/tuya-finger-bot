@@ -304,8 +304,8 @@ class FingerBot:
         req = self.device_info_request()
         self.send_request(req)
 
-        while True:
-            time.sleep(10)
+        #while True:
+        time.sleep(10)
 
     def next_sn_ack(self):
         self.sn_ack += 1
