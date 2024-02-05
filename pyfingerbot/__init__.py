@@ -279,7 +279,8 @@ class FingerBot:
         self.secret_key_manager = SecretKeyManager(self.login_key)
         self.ble_receiver = BleReceiver(self.secret_key_manager)
 
-        self.adapter = pygatt.GATTToolBackend(hci_device='hci1')
+        #self.adapter = pygatt.GATTToolBackend(hci_device='hci1')
+        self.adapter = pygatt.GATTToolBackend()
         self.reset_sn_ack()
 
     def connect(self):
@@ -359,10 +360,10 @@ class FingerBot:
         iv = TuyaDataPacket.get_random_iv()
 
         dps = [
-            [8, DpType.ENUM, 0],
-            [DpAction.ARM_DOWN_PERCENT, DpType.INT, 80],
-            [DpAction.ARM_UP_PERCENT, DpType.INT, 0],
-            [DpAction.CLICK_SUSTAIN_TIME, DpType.INT, 0],
+            [DpAction.MODE, DpType.ENUM, 0],
+            #[DpAction.ARM_DOWN_PERCENT, DpType.INT, 80],
+            #[DpAction.ARM_UP_PERCENT, DpType.INT, 0],
+            #[DpAction.CLICK_SUSTAIN_TIME, DpType.INT, 0],
             [DpAction.CLICK, DpType.BOOLEAN, True],
         ]
 
