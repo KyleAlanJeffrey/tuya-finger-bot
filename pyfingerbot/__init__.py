@@ -375,7 +375,7 @@ class FingerBot:
             #[DpAction.ARM_DOWN_PERCENT, DpType.INT, 80],
             #[DpAction.ARM_UP_PERCENT, DpType.INT, 0],
             #[DpAction.CLICK_SUSTAIN_TIME, DpType.INT, 0],
-            [DpAction.CLICK, DpType.BOOLEAN, True],
+            [DpAction.TOGGLE_SWITCH, DpType.BOOLEAN, True],
         ]
 
         raw = b''
