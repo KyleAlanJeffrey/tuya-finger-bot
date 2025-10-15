@@ -1,2 +1,3 @@
 pygatt
 pycryptodome
+pexpect

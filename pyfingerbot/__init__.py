@@ -288,6 +288,7 @@ class FingerBot:
 
         self.secret_key_manager = SecretKeyManager(self.login_key)
         self.ble_receiver = BleReceiver(self.secret_key_manager)
+        self.paired = False
 
         #self.adapter = pygatt.GATTToolBackend(hci_device='hci1')
         self.adapter = pygatt.GATTToolBackend()
@@ -299,13 +300,27 @@ class FingerBot:
 
         self.device = self.adapter.connect(self.mac, address_type=pygatt.BLEAddressType.public)
         self.device.subscribe(self.NOTIF_UUID, callback=self.handle_notification)
-
-        print('Connecting...')
+        # Send pair request
         req = self.device_info_request()
         self.send_request(req)
 
-        #while True:
-        time.sleep(10)
+        # Sit and wait for pairing
+        start_time = time.time()
+        connection_timeout_s = 10
+        while not self.paired:
+            if time.time() - start_time > connection_timeout_s:
+                print('Connection timed out!')
+                return
+            time.sleep(1)
+
+    def finger(self):
+        if not self.paired:
+            print('Device not paired')
+            return
+
+        print('Finger...')
+        req = self.send_dps([])
+        self.send_request(req)
 
     def next_sn_ack(self):
         self.sn_ack += 1
@@ -327,11 +342,8 @@ class FingerBot:
             req = self.pair_request()
             self.send_request(req)
         elif ret.code == Coder.FUN_SENDER_PAIR:
-            while True:
-                print('Fingering...')
-                req = self.send_dps([])
-                self.send_request(req)
-                time.sleep(4)
+            print('Paired!')
+            self.paired = True
 
     def send_request(self, xrequest):
         packets = xrequest.pack()
